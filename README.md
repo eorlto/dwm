@@ -12,6 +12,5 @@ My current working dwm:
   - fibonacci patch (using MODKEY+{q,w}
   - focusaddjacenttag patch
   - trayer patch
-  - movestack patch
-
+  - stacker patch
 
