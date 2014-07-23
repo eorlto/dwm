@@ -1,6 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 #include "fibonacci.c"
-#include "movestack.c"
 
 /* appearance */
 static const char font[]            = "Sans 8";
@@ -48,15 +47,15 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
-/*#define STACKKEYS(MOD,ACTION) \
-	{ MOD, 44,     ACTION##stack, {.i = INC(+1) } }, \
-	{ MOD, 45,     ACTION##stack, {.i = INC(-1) } }, \
-	{ MOD, 34, ACTION##stack, {.i = PREVSEL } }, \
-	{ MOD, 24,     ACTION##stack, {.i = 0 } }, \
-	{ MOD, 38,     ACTION##stack, {.i = 1 } }, \
-	{ MOD, 52,     ACTION##stack, {.i = 2 } }, \
-	{ MOD, 53,     ACTION##stack, {.i = -1 } },
-*/
+#define STACKKEYS(MOD,ACTION) \
+	{ MOD,                          44,       ACTION##stack,  {.i = INC(+1) } }, \
+	{ MOD,                          45,       ACTION##stack,  {.i = INC(-1) } }, \
+	{ MOD,                          34,       ACTION##stack,  {.i = PREVSEL } }, \
+	{ MOD,                          24,       ACTION##stack,  {.i = 0 } }, \
+	{ MOD,                          38,       ACTION##stack,  {.i = 1 } }, \
+	{ MOD,                          52,       ACTION##stack,  {.i = 2 } }, \
+	{ MOD,                          53,       ACTION##stack,  {.i = -1 } },
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -71,24 +70,24 @@ static const char *backlightdown[] = { "xbacklight", "-dec", "5", NULL };
 static const char *backlightup[]   = { "xbacklight", "-inc", "5", NULL };
 
 static Key keys[] = {
-/* modifier             key    function        argument */
-	{ 0, 			232,   spawn,        { .v = backlightdown } },
-	{ 0, 			233,   spawn,        { .v = backlightup } }, 
-	{ 0, 			122,   spawn,        { .v = volumedown } },
-	{ 0, 			123,   spawn,        { .v = volumeup } }, 
-	{ 0, 			121,   spawn,        { .v = mute } }, 
-	{ MODKEY,               113,   viewtoleft,     {0} },
-	{ MODKEY,               114,  viewtoright,    {0} },
-	{ MODKEY|ShiftMask,     113,   tagtoleft,      {0} },
-	{ MODKEY|ShiftMask,     114,  tagtoright,     {0} },
-	{ MODKEY|ShiftMask,     46,      spawn,          {.v = termlock } },
+       /* modifier             key    function        argument */
+       { 0, 		       232,   spawn,          { .v = backlightdown } },
+       { 0, 		       233,   spawn,          { .v = backlightup } }, 
+       { 0, 		       122,   spawn,          { .v = volumedown } },
+       { 0, 		       123,   spawn,          { .v = volumeup } }, 
+       { 0, 		       121,   spawn,          { .v = mute } }, 
+       { MODKEY,               113,   viewtoleft,     {0} },
+       { MODKEY,               114,   viewtoright,    {0} },
+       { MODKEY|ShiftMask,     113,   tagtoleft,      {0} },
+       { MODKEY|ShiftMask,     114,   tagtoright,     {0} },
+       { MODKEY|ShiftMask,     46,    spawn,          {.v = termlock } },
        { MODKEY,               33,    spawn,          {.v = dmenucmd } }, // p
        { MODKEY|ShiftMask,     36,    spawn,          {.v = termcmd } }, // Return
        { MODKEY,               56,    togglebar,      {0} },             // b
-       { MODKEY,               44,    focusstack,     {.i = +1 } },      // j
-       { MODKEY,               45,    focusstack,     {.i = -1 } },      // k
-       { MODKEY|ShiftMask,     44,    movestack,      {.i = +1 } },      // j
-       { MODKEY|ShiftMask,     45,    movestack,      {.i = -1 } },      // k
+       //{ MODKEY,               44,    focusstack,     {.i = +1 } },      // j
+       //{ MODKEY,               45,    focusstack,     {.i = -1 } },      // k
+       STACKKEYS(MODKEY,              focus)
+       STACKKEYS(MODKEY|ShiftMask,    push)
        { MODKEY,               31,    incnmaster,     {.i = +1 } },      // i
        { MODKEY,               40,    incnmaster,     {.i = -1 } },      // d
        { MODKEY,               43,    setmfact,       {.f = -0.05} },    // h
@@ -99,8 +98,8 @@ static Key keys[] = {
        { MODKEY,               28,    setlayout,      {.v = &layouts[0]} }, // t
        { MODKEY,               41,    setlayout,      {.v = &layouts[1]} }, // f
        { MODKEY,               58,    setlayout,      {.v = &layouts[2]} }, // m
-       { MODKEY,               24,    setlayout,      {.v = &layouts[3]} }, // m
-       { MODKEY,               25,    setlayout,      {.v = &layouts[4]} }, // m
+       { MODKEY,               25,    setlayout,      {.v = &layouts[3]} }, // m
+       { MODKEY,               24,    setlayout,      {.v = &layouts[4]} }, // m
        { MODKEY,               65,    setlayout,      {0} },             // space           
        { MODKEY|ShiftMask,     65,    togglefloating, {0} },             // space
        { MODKEY,               19,    view,           {.ui = ~0 } },     // 0
