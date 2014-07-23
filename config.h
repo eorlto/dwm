@@ -74,7 +74,6 @@ static Key keys[] = {
 /* modifier             key    function        argument */
 	{ 0, 			232,   spawn,        { .v = backlightdown } },
 	{ 0, 			233,   spawn,        { .v = backlightup } }, 
-	{ 0, 			121,   spawn,        { .v = mute } }, 
 	{ 0, 			122,   spawn,        { .v = volumedown } },
 	{ 0, 			123,   spawn,        { .v = volumeup } }, 
 	{ 0, 			121,   spawn,        { .v = mute } }, 
