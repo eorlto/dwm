@@ -94,11 +94,11 @@ static Key keys[] = {
        { MODKEY,               36,    zoom,           {0} },             // Return
        { MODKEY,               23,    view,           {0} },             // Tab
        { MODKEY|ShiftMask,     54,    killclient,     {0} },             // c
-       { MODKEY,               28,    setlayout,      {.v = &layouts[0]} }, // t
-       { MODKEY,               41,    setlayout,      {.v = &layouts[1]} }, // f
-       { MODKEY,               58,    setlayout,      {.v = &layouts[2]} }, // m
-       { MODKEY,               25,    setlayout,      {.v = &layouts[3]} }, // m
-       { MODKEY,               24,    setlayout,      {.v = &layouts[4]} }, // m
+       { MODKEY,               28,    setlayout,      {.v = &layouts[1]} }, // t
+       { MODKEY,               41,    setlayout,      {.v = &layouts[2]} }, // f
+       { MODKEY,               58,    setlayout,      {.v = &layouts[3]} }, // m
+       { MODKEY,               25,    setlayout,      {.v = &layouts[4]} }, // w
+       { MODKEY,               24,    setlayout,      {.v = &layouts[0]} }, // q
        { MODKEY,               65,    setlayout,      {0} },             // space           
        { MODKEY|ShiftMask,     65,    togglefloating, {0} },             // space
        { MODKEY,               19,    view,           {.ui = ~0 } },     // 0
