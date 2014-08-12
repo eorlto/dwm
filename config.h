@@ -47,8 +47,8 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define STACKKEYS(MOD,ACTION) \
-	{ MOD,                          44,       ACTION##stack,  {.i = INC(+1) } }, \
-	{ MOD,                          45,       ACTION##stack,  {.i = INC(-1) } }, \
+	{ MOD,                          45,       ACTION##stack,  {.i = INC(+1) } }, \
+	{ MOD,                          44,       ACTION##stack,  {.i = INC(-1) } }, \
 	{ MOD,                          34,       ACTION##stack,  {.i = PREVSEL } }, \
 	{ MOD,                          24,       ACTION##stack,  {.i = 0 } }, \
 	{ MOD,                          38,       ACTION##stack,  {.i = 1 } }, \
