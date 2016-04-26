@@ -2,7 +2,7 @@
 #include "fibonacci.c"
 
 /* appearance */
-static const char font[]            = "Sans 8";
+static const char font[]            = "Sans 10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -22,6 +22,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
 	{ "Spotify",     NULL,       NULL,       0,            True,        -1 },
+	{ "HandBrake",     NULL,       NULL,       0,            True,        -1 },
 	{ "trayer",        NULL,       NULL,    ~0,        True,    -1 },
 };
 
@@ -59,14 +60,20 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", "Sans-10", "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "sakura", NULL };
 static const char *termlock[]  = { "slock", NULL };
-static const char *volumedown[] = { "amixer","-q", "set", "Master", "5%-", "unmute", NULL };
-static const char *volumeup[]   = { "amixer","-q", "set", "Master", "5%+", "unmute", NULL };
-static const char *mute[]       = { "amixer","-q", "set", "Master", "toggle", NULL };
-static const char *backlightdown[] = { "xbacklight", "-dec", "5", NULL };
-static const char *backlightup[]   = { "xbacklight", "-inc", "5", NULL };
+static const char *screenshotcmd[]   = { "scrot", "-s", NULL };
+//static const char *volumedown[] = { "amixer","-q", "set", "Master", "5%-", "unmute", NULL };
+//static const char *volumeup[]   = { "amixer","-q", "set", "Master", "5%+", "unmute", NULL };
+//static const char *mute[]       = { "amixer","-q", "set", "Master", "toggle", NULL };
+static const char *volumedown[] = { "pulseaudio-ctl","down", NULL };
+static const char *volumeup[]   = { "pulseaudio-ctl","up", NULL };
+static const char *mute[]       = { "pulseaudio-ctl","mute", NULL };
+static const char *backlightdown[] = { "xbacklight", "-dec", "15", NULL };
+static const char *backlightup[]   = { "xbacklight", "-inc", "15", NULL };
+static const char *invert[]   = { "xcalib", "-invert", "-alter", NULL };
+
 
 static Key keys[] = {
        /* modifier             key    function        argument */
@@ -79,9 +86,11 @@ static Key keys[] = {
        { MODKEY,               114,   viewtoright,    {0} },
        { MODKEY|ShiftMask,     113,   tagtoleft,      {0} },
        { MODKEY|ShiftMask,     114,   tagtoright,     {0} },
+       { MODKEY|ShiftMask,     31,    spawn,          {.v = invert } },
        { MODKEY|ShiftMask,     46,    spawn,          {.v = termlock } },
        { MODKEY,               33,    spawn,          {.v = dmenucmd } }, // p
        { MODKEY|ShiftMask,     36,    spawn,          {.v = termcmd } }, // Return
+       { 0,				       107,    spawn,          {.v = screenshotcmd } }, // PrintScr
        { MODKEY,               56,    togglebar,      {0} },             // b
        //{ MODKEY,               44,    focusstack,     {.i = +1 } },      // j
        //{ MODKEY,               45,    focusstack,     {.i = -1 } },      // k
